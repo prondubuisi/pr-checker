@@ -29,7 +29,7 @@ const start = () => {
   app.use(bodyParser.json());
 
   const corsOptions = {
-    origin:  process.env.GITHUB_TOKEN
+    origin:  process.env.REACT_APP_HOSTNAME
   };
 
   app.use(cors(corsOptions));
