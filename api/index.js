@@ -29,7 +29,7 @@ const start = () => {
   app.use(bodyParser.json());
 
   const corsOptions = {
-    origin: process.env.REACT_APP_HOSTNAME
+    origin: "https:/herokuapp.com"
   };
 
   app.use(cors(corsOptions));

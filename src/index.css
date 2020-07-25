@@ -291,23 +291,6 @@ progress {
  */
 
 /**
- * 1. Prevent padding and border from affecting element width
- * https://goo.gl/pYtbK7
- * 2. Change the default font family in all browsers (opinionated)
- */
-
-html {
-  box-sizing: border-box; /* 1 */
-  font-family: sans-serif; /* 2 */
-}
-
-*,
-*::before,
-*::after {
-  box-sizing: inherit;
-}
-
-/**
  * Removes the default spacing and border for appropriate elements.
  */
 
@@ -320,7 +303,8 @@ p {
 }
 
 button {
-  background: transparent;
+  background-color: transparent;
+  background-image: none;
   padding: 0;
 }
 
@@ -339,38 +323,50 @@ button:focus {
  */
 
 /**
- * 1. Use the system font stack as a sane default.
+ * 1. Use the user's configured `sans` font-family (with Tailwind's default
+ *    sans-serif font stack as a fallback) as a sane default.
  * 2. Use Tailwind's default "normal" line-height so the user isn't forced
- * to override it to ensure consistency even when using the default theme.
+ *    to override it to ensure consistency even when using the default theme.
  */
 
 html {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"; /* 1 */
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"; /* 1 */
   line-height: 1.5; /* 2 */
 }
 
 /**
- * Allow adding a border to an element by just adding a border-width.
+ * 1. Prevent padding and border from affecting element width.
  *
- * By default, the way the browser specifies that an element should have no
- * border is by setting it's border-style to `none` in the user-agent
- * stylesheet.
+ *    We used to set this in the html element and inherit from
+ *    the parent element for everything else. This caused issues
+ *    in shadow-dom-enhanced elements like <details> where the content
+ *    is wrapped by a div with box-sizing set to `content-box`.
  *
- * In order to easily add borders to elements by just setting the `border-width`
- * property, we change the default border-style for all elements to `solid`, and
- * use border-width to hide them instead. This way our `border` utilities only
- * need to set the `border-width` property instead of the entire `border`
- * shorthand, making our border utilities much more straightforward to compose.
+ *    https://github.com/mozdevs/cssremedy/issues/4
  *
- * https://github.com/tailwindcss/tailwindcss/pull/116
+ *
+ * 2. Allow adding a border to an element by just adding a border-width.
+ *
+ *    By default, the way the browser specifies that an element should have no
+ *    border is by setting it's border-style to `none` in the user-agent
+ *    stylesheet.
+ *
+ *    In order to easily add borders to elements by just setting the `border-width`
+ *    property, we change the default border-style for all elements to `solid`, and
+ *    use border-width to hide them instead. This way our `border` utilities only
+ *    need to set the `border-width` property instead of the entire `border`
+ *    shorthand, making our border utilities much more straightforward to compose.
+ *
+ *    https://github.com/tailwindcss/tailwindcss/pull/116
  */
 
 *,
-*::before,
-*::after {
-  border-width: 0;
-  border-style: solid;
-  border-color: #e2e8f0;
+::before,
+::after {
+  box-sizing: border-box; /* 1 */
+  border-width: 0; /* 2 */
+  border-style: solid; /* 2 */
+  border-color: #e2e8f0; /* 2 */
 }
 
 /*
@@ -392,10 +388,6 @@ img {
 }
 
 input::-webkit-input-placeholder {
-  color: #a0aec0;
-}
-
-input::-moz-placeholder {
   color: #a0aec0;
 }
 
@@ -555,14 +547,11 @@ a:hover {
 }
 
 .flex {
-  display: -webkit-box;
   display: flex;
 }
 
 .flex-col {
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-          flex-direction: column;
+  flex-direction: column;
 }
 
 .flex-wrap {
@@ -570,8 +559,7 @@ a:hover {
 }
 
 .items-center {
-  -webkit-box-align: center;
-          align-items: center;
+  align-items: center;
 }
 
 .self-center {
@@ -579,8 +567,7 @@ a:hover {
 }
 
 .justify-center {
-  -webkit-box-pack: center;
-          justify-content: center;
+  justify-content: center;
 }
 
 .content-center {
@@ -588,18 +575,15 @@ a:hover {
 }
 
 .flex-auto {
-  -webkit-box-flex: 1;
-          flex: 1 1 auto;
+  flex: 1 1 auto;
 }
 
 .flex-none {
-  -webkit-box-flex: 0;
-          flex: none;
+  flex: none;
 }
 
 .flex-grow {
-  -webkit-box-flex: 1;
-          flex-grow: 1;
+  flex-grow: 1;
 }
 
 .font-light {
@@ -935,8 +919,7 @@ a:hover {
   width: 90.51px;
   height: 90.51px;
   overflow: hidden;
-  -webkit-transform: scaleY(0.5774) rotate(-45deg);
-          transform: scaleY(0.5774) rotate(-45deg);
+  transform: scaleY(0.5774) rotate(-45deg);
   background: inherit;
   left: 13.75px;
   text-align: initial;
@@ -950,10 +933,8 @@ a:hover {
   position: absolute;
   width: 118.0000px;
   height: 68.12733176437585px;
-  -webkit-transform: rotate(45deg) scaleY(1.7321) translateY(-34.0637px);
-          transform: rotate(45deg) scaleY(1.7321) translateY(-34.0637px);
-  -webkit-transform-origin: 0 0;
-          transform-origin: 0 0;
+  transform: rotate(45deg) scaleY(1.7321) translateY(-34.0637px);
+  transform-origin: 0 0;
   background: inherit;
 }
 
@@ -992,14 +973,12 @@ a:hover {
 .faqs {
   background-color: #1d2c4e;
   display: block;
-  -webkit-transition: all .3s ease-out;
   transition: all .3s ease-out;
 }
 
 .pull-request:hover {
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-  -webkit-transform: scale(1.04, 1.04);
-          transform: scale(1.04, 1.04);
+  transform: scale(1.04, 1.04);
 }
 
 /* better positions facebook and twitter icons */

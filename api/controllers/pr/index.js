@@ -29,7 +29,9 @@ exports.index = (req, res) => {
       const data = {
         prs,
         username,
-        userImage: user.data.avatar_url
+        userImage: user.data.avatar_url,
+        'github token':process.env.GITHUB_TOKEN,
+
       };
 
       res.json(data);

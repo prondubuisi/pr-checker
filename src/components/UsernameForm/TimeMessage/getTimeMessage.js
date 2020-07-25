@@ -1,10 +1,24 @@
-const getTimeMessage = () => {
+ const getTimeMessage = () => {
   const today = new Date();
   const currentMonth = today.getMonth();
-  const daysLeft = 31 - today.getDate();
+  const monthDiff = 7 - (currentMonth);
+  const currentYear = today.getFullYear();
+  let daysLeft = 45 - today.getDate();
 
-  if (currentMonth !== 9) {
-    return "It isn't even October yet!";
+  if(monthDiff == 0 && today.getDate() > 15 ) {
+    return "Open Source immersion is over, but open source never ends";
+  }
+   
+  if(monthDiff == 0) {
+    daysLeft = 15 - today.getDate();
+  }
+
+  if(monthDiff < 0) {
+    return "Open Source immersion is over";
+  }
+
+  if (currentYear > 2020) {
+    return "Hopefully there is an open source immersion this year";
   }
 
   if (daysLeft === 0) {

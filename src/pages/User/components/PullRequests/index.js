@@ -76,8 +76,8 @@ export default class PullRequests extends Component {
     if (data && data.error_description) {
       return data.error_description;
     }
-
-    return "Couldn't find any data or we hit an error, err try again?";
+    console.log(data)
+    return error + "Couldn't find any data or we hit an error, err try again later1?";
   };
 
   render = () => {

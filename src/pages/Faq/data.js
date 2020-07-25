@@ -1,14 +1,15 @@
 export default [
     {
+        question: "What are some open source projects I could contribute to to make for the 1 PR from a facebook backed project",
+        answer: "Good question, here are some links https://github.com/fbdevelopercircles, https://opensource.facebook.com, https://github.com/facebook, https://github.com/facebookresearch, https://github.com/fbsamples"
+    },
+    {
         question: "Why do some PRs have 'Pending' next to them?",
-        answer: "There is a grace period this year which means that a PR must be open (or merged) for at least a week in order to give maintainers the chance to mark issues as invalid. Therefore, the PR will be marked as 'Pending' until that grace period has expired."
+        answer: "Remember I forked this repo from https://github.com/jenkoian/hacktoberfest-checker and I am yet to figure how to remove the pending flag, lol. That aside your PR's won't count until you share them in your local facebook developer circle group(finally a use for the pending flag! D:)"
     },
     {
-        question: "Why do some PRs show outside of October?",
-        answer: "If you've submitted a PR on the last day of September or the first day of November, there is a chance of it counting if it is October in any timezone."
+        question: "Why do some PRs show outside the Contribution timezone Window?",
+        answer: "This is most likely caused by varing timezones"
     },
-    {
-        question: "Why is this project needed if Hacktoberfest's `Profile` now shows your progress?",
-        answer: "While it is true you can see your progress on Hacktoberfest's official website at https://hacktoberfest.digitalocean.com/profile it requires that you authenticate with Github. Hacktoberfest Checker doesn't require authentication so you can check on your own progress, or your mates progress, without needing to log in. Plus this is still a really fun and rewarding project to work on and we've done it for years before they ever thought to do it themselves :-)"
-    }
+    
 ]

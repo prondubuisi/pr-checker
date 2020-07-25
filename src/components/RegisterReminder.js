@@ -14,13 +14,13 @@ const RegisterReminder = () => (
     <span className="text-md leading-tight ml-4 mr-16 md:mr-8">
       Remember to{' '}
       <a
-        href="https://hacktoberfest.digitalocean.com/profile"
+        href="https://developers.facebook.com/developercircles/open-source-immersion/"
         target="_blank"
         rel="noopener noreferrer"
       >
         register
       </a>{' '}
-      to be eligible for the tee!
+      to be eligible for the certifcate and tee!
     </span>
   </div>
 );

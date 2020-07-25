@@ -5,11 +5,11 @@ const Footer = () => (
     <p className="text-white">
       Disclaimer: This site is fan made and not affiliated with{' '}
       <a
-        href="https://hacktoberfest.digitalocean.com/"
+        href="https://developers.facebook.com/developercircles/open-source-immersion/"
         target="_blank"
         rel="noopener noreferrer"
       >
-        Hacktoberfest
+        Facebook 
       </a>
       .
     </p>
