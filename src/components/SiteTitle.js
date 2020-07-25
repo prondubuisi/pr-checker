@@ -7,7 +7,7 @@ const SiteTitle = () => (
         Open Source Immersion<span className="text-mid-purple"></span>
       </h1>
       <small className="block text-right -mt-4 mr-8 text-yellow text-base italic">
-        Checker
+        Pull Request Checker
       </small>
     </a>
   </div>
