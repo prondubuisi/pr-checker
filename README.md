@@ -1,4 +1,4 @@
-# Hacktoberfest Checker
+# Pull Request Checker
 
 Shout out to the original author of this project [Jenko](https://github.com/jenkoian), this is a modified version for the [Open Source Immersion programme](https://developers.facebook.com/developercircles/open-source-immersion/). This project is fan made and has no affliation with facebook.
 

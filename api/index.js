@@ -29,7 +29,7 @@ const start = () => {
   app.use(bodyParser.json());
 
   const corsOptions = {
-    origin: "https:/herokuapp.com"
+    origin:  process.env.GITHUB_TOKEN
   };
 
   app.use(cors(corsOptions));
