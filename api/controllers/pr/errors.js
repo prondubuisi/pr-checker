@@ -12,7 +12,7 @@ const getStatusCode = error => statusCodes[error] || 400;
 
 const getErrorDescription = error =>
   errorDescriptions[error] ||
-  "Couldn't find any data or we hit an error, err try again later3?";
+  "Couldn't find any data or we hit an error, err try again later?";
 
 module.exports.getStatusCode = getStatusCode;
 module.exports.getErrorDescription = getErrorDescription;

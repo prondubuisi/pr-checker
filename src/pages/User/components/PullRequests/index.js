@@ -48,7 +48,7 @@ export default class PullRequests extends Component {
       loading: true
     });
 
-    fetch(`${apiUrl}/prs?username=${username}`, {
+    fetch(`https://opensourceic.herokuapp.com/prs?username=${username}`, {
       method: 'GET'
     })
       .then(response => response.json())
@@ -77,7 +77,7 @@ export default class PullRequests extends Component {
       return data.error_description;
     }
     console.log(data)
-    return error + "Couldn't find any data or we hit an error, err try again later1?";
+    return  + "Couldn't find any data or we hit an error, err try again later?";
   };
 
   render = () => {

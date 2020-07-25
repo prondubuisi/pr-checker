@@ -10,7 +10,7 @@ ErrorText.propTypes = {
 };
 
 ErrorText.defaultProps = {
-  errorMessage: "Couldn't find any data or we hit an error, err try again later1?"
+  errorMessage: "Couldn't find any data or we hit an error, err try again later?"
 };
 
 export default ErrorText;
