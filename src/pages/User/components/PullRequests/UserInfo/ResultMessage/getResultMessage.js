@@ -12,8 +12,7 @@ const messages = [
 const getResultMessage = pullRequestCount => {
   const currentMonth = new Date().getMonth();
 
-  return "pull request results";
-  
+  return "Pull request results"
   const isShowingOff = pullRequestCount > pullRequestAmount;
 
   if (isShowingOff) {
