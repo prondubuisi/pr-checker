@@ -48,7 +48,7 @@ export default class PullRequests extends Component {
       loading: true
     });
 
-    fetch(`https://opensourceic.herokuapp.com/prs?username=${username}`, {
+    fetch(`https://opensourcei.herokuapp.com/prs?username=${username}`, {
       method: 'GET'
     })
       .then(response => response.json())
