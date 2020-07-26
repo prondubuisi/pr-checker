@@ -1,12 +1,10 @@
 {
   "name": "hacktoberfest-checker",
-  "description":
-    "Small app to see if you have fulfilled the requirements for a Hacktoberfest t-shirt.",
-  "keywords": ["hacktoberfest", "hacktoberfestchecker"],
+  "description": "Small app to see if you have fulfilled the requirements for a Hacktoberfest t-shirt.",
+  "keywords": ["opensource-immersion", "opensource immersion"],
   "website": "https://hacktoberfestchecker.jenko.me",
   "repository": "https://github.com/jenkoian/hacktoberfest-checker",
-  "logo":
-    "https://github.com/jenkoian/hacktoberfest-checker/blob/master/public/img/og.png?raw=true",
+  "logo": "https://user-images.githubusercontent.com/22311928/88468217-25c2c280-ced8-11ea-949c-515ecff1036e.png",
   "success_url": "/",
   "env": {
     "GITHUB_TOKEN": {
