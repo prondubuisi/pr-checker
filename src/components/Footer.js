@@ -21,7 +21,7 @@ const Footer = () => (
         target="_blank"
         rel="noopener noreferrer"
       >
-        Facebook 
+        Open Source Immersion 
 
       </a>
       .
