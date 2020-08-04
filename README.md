@@ -13,7 +13,7 @@ Happy hacking!
 
 ## Running the app
 
-* [Generate a GitHub personal access token](https://github.com/settings/tokens/new?scopes=&description=Hacktoberfest%20Checker) to ensure you don't get rate limited as often.
+* [Generate a GitHub personal access token](https://github.com/settings/tokens/new?scopes=&description=Open%20Source%20Immersion%20Checker) to ensure you don't get rate limited as often.
 
 * Create a `.env` file using `.env.example` as an example. Or export the GitHub token as an environment variable for Node.js to use:
    * Mac/Linux: `export GITHUB_TOKEN=YOUR_TOKEN`

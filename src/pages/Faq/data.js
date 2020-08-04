@@ -4,7 +4,7 @@ export default [{
     },
     {
         question: "Why do some PRs have 'Pending' next to them?",
-        answer: "Remember I forked this repo from <a href='https://github.com/jenkoian/hacktoberfest-checker' target='_blank' rel='noopener noreferrer' >https://github.com/jenkoian/hacktoberfest-checker</a> and I am yet to figure how to remove the pending flag, lol. That aside your PR's won't count until you share them in your local facebook developer circle group (finally a use for the pending flag! D:)"
+        answer: "Remember I forked this repo from <a href='https://github.com/prondubuisi/pr-checker' target='_blank' rel='noopener noreferrer' >https://github.com/prondubuisi/pr-checker</a> and I am yet to figure how to remove the pending flag, lol. That aside your PR's won't count until you share them in your local facebook developer circle group (finally a use for the pending flag! D:)"
     },
     {
         question: 'Why do some PRs show outside the Contribution timezone Window?',

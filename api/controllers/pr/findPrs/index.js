@@ -16,7 +16,7 @@ const findPrs = (github, username) => {
 
         const hacktoberFestLabels = _.some(
           event.labels,
-          label => label.name.toLowerCase() === 'hacktoberfest'
+          label => label.name.toLowerCase() === 'open-source-immersion'
         );
 
         const weekOld = moment().subtract(7, 'days').startOf('day');

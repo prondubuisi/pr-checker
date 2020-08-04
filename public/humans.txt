@@ -18,4 +18,4 @@
 [Rafael Klaessen](https://github.com/rafaelklaessen)
 [radiantly](https://github.com/radiantly)
 
-Contributed but missing from this list? Open a PR! https://github.com/jenkoian/hacktoberfest-checker
+Contributed but missing from this list? Open a PR! https://github.com/prondubuisi/pr-checker

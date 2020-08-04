@@ -1,9 +1,9 @@
 {
-  "name": "hacktoberfest-checker",
-  "description": "Small app to see if you have fulfilled the requirements for a Hacktoberfest t-shirt.",
+  "name": "open-source-immersion-checker",
+  "description": "Small app to see if you have fulfilled the requirements for a Open Source Immersion.",
   "keywords": ["opensource-immersion", "opensource immersion"],
-  "website": "https://hacktoberfestchecker.jenko.me",
-  "repository": "https://github.com/jenkoian/hacktoberfest-checker",
+  "website": "https://osimmersion.herokuapp.com",
+  "repository": "https://github.com/prondubuisi/pr-checker",
   "logo": "https://user-images.githubusercontent.com/22311928/88468217-25c2c280-ced8-11ea-949c-515ecff1036e.png",
   "success_url": "/",
   "env": {
