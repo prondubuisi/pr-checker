@@ -1,7 +1,7 @@
 version: "3"
 
 services:
-  hacktoberfest:
+  opensourceimmersion:
     build: .
     env_file:
       - .env

@@ -10,7 +10,7 @@ const setupGithubApi = () => {
     host: 'api.github.com',
     timeout: 5000,
     headers: {
-      'user-agent': 'Hacktoberfest Checker'
+      'user-agent': 'Open Source Immersion Checker'
     }
   });
 

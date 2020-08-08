@@ -85,6 +85,11 @@ strong {
  * 2. Correct the odd `em` font sizing in all browsers.
  */
 
+code {
+  font-family: monospace, monospace; /* 1 */
+  font-size: 1em; /* 2 */
+}
+
 /**
  * Add the correct font size in all browsers.
  */
@@ -298,6 +303,7 @@ progress {
 h1,
 h2,
 h3,
+figure,
 p {
   margin: 0;
 }
@@ -442,6 +448,11 @@ input {
  * back to the system monospace stack if there is no configured
  * 'mono' font family.
  */
+
+
+code {
+  font-family: Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
 
 /**
  * Make replaced elements `display: block` by default as that's

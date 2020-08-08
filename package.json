@@ -1,7 +1,7 @@
 {
-  "name": "hacktoberfest-checker",
+  "name": "open-source-immersion-checker",
   "version": "5.0.0",
-  "description": "Small app to see if you have fulfilled the requirements for a Hacktoberfest t-shirt",
+  "description": "Small app to see if you have fulfilled the requirements for a Open Source Immersion",
   "main": "index.js",
   "engines": {
     "node": ">=12.13.0"
@@ -21,7 +21,7 @@
     "prettier-fix": "prettier --write \"{src,api}/**/*.js\""
   },
   "keywords": [
-    "hacktoberfest"
+    "open-source-immersion"
   ],
   "author": "Ian Jenkins",
   "license": "MIT",
@@ -53,7 +53,7 @@
     "prettier": "^1.19.1",
     "tailwindcss": "^1.2.0"
   },
-  "repository": "git@github.com:jenkoian/hacktoberfest-checker.git",
+  "repository": "git@github.com:prondubuisi/pr-checker.git",
   "browserslist": [
     ">0.2%",
     "not dead",
