@@ -31,6 +31,17 @@ const ShareButtons = ({ username, pullRequestCount }) => (
         <i className="fab fa-facebook fa-lg" /> Share
       </a>
     </div>
+    <div className="p-2" id="twitter-share">
+      <a
+        target="_blank"
+        rel="noopener noreferrer"
+        className="bg-mid-purple hover:bg-light-blue text-white hover:text-mid-blue px-2 py-1 pointer no-underline text-sm"
+        href={`https://api.whatsapp.com/send?text=My progress on Open Source Immersion ${pullRequestCount} / ${pullRequestAmount}, check it out here ${process.env.REACT_APP_HOSTNAME}/user/${username}&hashtags=opensourceimmersion,pullrequestchecker`}
+        data-size="large"
+      >
+        <i className="fab fa-whatsapp fa-lg" /> Whatsapp
+      </a>
+    </div>
   </div>
 );
 

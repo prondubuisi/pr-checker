@@ -36,8 +36,10 @@ exports.index = (req, res) => {
 
       res.json(data);
     })
+    .then(data=> console.log(data))
     .catch(err => {
       console.log('Error: ' + err);
+      console.log(process.env.GITHUB_TOKEN);
 
       const statusCode = getStatusCode(err);
       const errorDescription = getErrorDescription(err);
