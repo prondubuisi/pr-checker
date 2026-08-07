@@ -1,42 +1,57 @@
 'use strict';
 
-const getNextPage = require('./getNextPage');
+// Original Facebook Developer Circles Open Source Immersion window (2020).
+// https://developers.facebook.com/developercircles/open-source-immersion/
+const ORIGINAL_IMMERSION_YEAR = 2020;
 
 const buildQuery = (username, searchYear) =>
   `-label:invalid+created:${searchYear}-07-15T00:00:00-12:00..${searchYear}-08-15T23:59:59-12:00+type:pr+is:public+author:${username}`;
 
-const loadPrs = (github, username) =>
-  new Promise((resolve, reject) => {
-    const today = new Date();
-    const currentMonth = today.getMonth();
-    const currentYear = today.getFullYear();
-    const searchYear =  currentYear;
-
-    github.search.issues(
-      {
-        q: buildQuery(username, searchYear),
-        // 30 is the default but this makes it clearer/allows it to be tweaked
-        per_page: 100
-      },
-      (err, res) => {
-        if (err) {
-          return reject();
-        }
-
-        const pullRequestData = res.data.items;
-        if (github.hasNextPage(res)) {
-          getNextPage(res, github, pullRequestData).then(pullRequestData =>
-            resolve(pullRequestData)
-          );
-          return;
-        }
-
-        if (process.env.NODE_ENV !== 'production') {
-          console.log(`Found ${pullRequestData.length} pull requests.`);
-        }
-        resolve(pullRequestData);
-      }
-    );
+const fetchPrsForYear = async (github, username, searchYear) => {
+  return github.paginate(github.rest.search.issuesAndPullRequests, {
+    q: buildQuery(username, searchYear),
+    per_page: 100
   });
+};
+
+const loadPrs = async (github, username) => {
+  const currentYear = new Date().getFullYear();
+
+  // Always include the original immersion period (2020).
+  // Also include the current year's Jul 15–Aug 15 window when it differs.
+  const years = new Set([ORIGINAL_IMMERSION_YEAR, currentYear]);
+
+  const resultsByYear = await Promise.all(
+    [...years].map(year => fetchPrsForYear(github, username, year))
+  );
+
+  // Dedupe by PR id in case a year is listed twice
+  const seen = new Set();
+  const pullRequestData = [];
+
+  for (const items of resultsByYear) {
+    for (const item of items) {
+      if (!seen.has(item.id)) {
+        seen.add(item.id);
+        pullRequestData.push(item);
+      }
+    }
+  }
+
+  // Newest first
+  pullRequestData.sort(
+    (a, b) => new Date(b.created_at) - new Date(a.created_at)
+  );
+
+  if (process.env.NODE_ENV !== 'production') {
+    console.log(
+      `Found ${pullRequestData.length} pull requests (years: ${[...years].join(
+        ', '
+      )}).`
+    );
+  }
+
+  return pullRequestData;
+};
 
 module.exports = loadPrs;

@@ -5,9 +5,9 @@ const findPrs = require('./findPrs');
 const { getStatusCode, getErrorDescription } = require('./errors');
 
 /**
- * GET /
+ * GET /prs
  */
-exports.index = (req, res) => {
+exports.index = async (req, res) => {
   const github = req.app.get('github');
   const username = req.query.username;
 
@@ -17,33 +17,31 @@ exports.index = (req, res) => {
     });
   }
 
-  Promise.all([
-    findPrs(github, username),
-    github.users.getForUser({ username }).then(logCallsRemaining)
-  ])
-    .then(([prs, user]) => {
-      if (user.data.type !== 'User') {
-        return Promise.reject('notUser');
-      }
+  try {
+    const [prs, user] = await Promise.all([
+      findPrs(github, username),
+      github.rest.users.getByUsername({ username }).then(logCallsRemaining)
+    ]);
 
-      const data = {
-        prs,
-        username,
-        userImage: user.data.avatar_url,
-        'github token':process.env.GITHUB_TOKEN,
-
-      };
-
-      res.json(data);
-    })
-    .catch(err => {
-      console.log('Error: ' + err);
-
-      const statusCode = getStatusCode(err);
-      const errorDescription = getErrorDescription(err);
-
-      res.status(statusCode).json({
-        error_description: errorDescription
+    if (user.data.type !== 'User') {
+      return res.status(400).json({
+        error_description: getErrorDescription('notUser')
       });
+    }
+
+    res.json({
+      prs,
+      username,
+      userImage: user.data.avatar_url
     });
+  } catch (err) {
+    console.log('Error: ' + err);
+
+    const statusCode = getStatusCode(err);
+    const errorDescription = getErrorDescription(err);
+
+    res.status(statusCode).json({
+      error_description: errorDescription
+    });
+  }
 };

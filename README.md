@@ -8,7 +8,7 @@ Happy hacking!
 
 ## Requirements
 
-* Node v10+
+* Node v18+
 > Recommended to use [NVM](https://github.com/creationix/nvm)
 
 ## Running the app

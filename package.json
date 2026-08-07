@@ -1,20 +1,20 @@
 {
   "name": "open-source-immersion-checker",
-  "version": "5.0.0",
+  "version": "6.0.0",
   "description": "Small app to see if you have fulfilled the requirements for a Open Source Immersion",
   "main": "index.js",
   "engines": {
-    "node": ">=12.13.0"
+    "node": ">=18"
   },
   "scripts": {
-    "start": "npm run build; npm run start-server",
-    "start-development": "npm-run-all -l -p  \"start-frontend\" \"start-server\"",
-    "start-frontend": "react-scripts start",
+    "start": "npm run build && npm run start-server",
+    "start-development": "npm-run-all -l -p \"start-frontend\" \"start-server\"",
+    "start-frontend": "npm run tailwind-gen && react-scripts start",
     "start-server": "node index.js",
-    "build": "react-scripts build",
+    "build": "npm run tailwind-gen && react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "tailwind-gen": "node ./node_modules/.bin/postcss ./src/style.css -o ./src/index.css",
+    "tailwind-gen": "postcss ./src/style.css -o ./src/index.css",
     "eslint": "npm run prettier",
     "eslint-fix": "npm run prettier-fix",
     "prettier": "prettier \"{src,api}/**/*.js\"",
@@ -26,38 +26,41 @@
   "author": "Ian Jenkins",
   "license": "MIT",
   "dependencies": {
-    "body-parser": "^1.15.1",
+    "@octokit/rest": "^21.1.1",
     "cors": "^2.8.5",
-    "dotenv": "^4.0.0",
-    "express": "^4.13.4",
-    "github": "^12.0.0",
-    "lodash": "^4.17.19",
-    "moment": "^2.18.1",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "html-react-parser": "^5.2.2",
+    "lodash": "^4.17.21",
+    "moment": "^2.30.1",
     "morgan": "^1.10.0",
-    "postcss-url": "^8.0.0",
-    "prop-types": "^15.6.2",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
-    "react-helmet": "^5.2.0",
-    "react-html-parser": "^2.0.2",
-    "react-router-dom": "^4.3.1",
-    "react-scripts": "^3.4.1"
+    "prop-types": "^15.8.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-helmet-async": "^2.0.5",
+    "react-router-dom": "^6.30.0",
+    "react-scripts": "^5.0.1"
   },
   "devDependencies": {
-    "@fullhuman/postcss-purgecss": "^1.3.0",
-    "autoprefixer": "^9.7.5",
-    "nodemon": "^2.0.4",
+    "autoprefixer": "^10.4.21",
+    "nodemon": "^3.1.9",
     "npm-run-all": "^4.1.5",
-    "postcss-cli": "^6.1.3",
-    "postcss-easy-import": "^3.0.0",
-    "prettier": "^1.19.1",
-    "tailwindcss": "^1.2.0"
+    "postcss": "^8.5.3",
+    "postcss-cli": "^11.0.1",
+    "prettier": "^3.5.3",
+    "tailwindcss": "^3.4.17"
   },
   "repository": "git@github.com:prondubuisi/pr-checker.git",
-  "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not ie <= 11",
-    "not op_mini all"
-  ]
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
 }

@@ -2,68 +2,63 @@
 
 const _ = require('lodash');
 const moment = require('moment');
-const logCallsRemaining = require('../logCallsRemaining');
 const loadPrs = require('./loadPrs');
 
-const findPrs = (github, username) => {
-  return loadPrs(github, username)
-    .then(pullRequestData =>
-      _.map(pullRequestData, event => {
-        const repo = event.pull_request.html_url.substring(
-          0,
-          event.pull_request.html_url.search('/pull/')
-        );
+const findPrs = async (github, username) => {
+  const pullRequestData = await loadPrs(github, username);
 
-        const hacktoberFestLabels = _.some(
-          event.labels,
-          label => label.name.toLowerCase() === 'open-source-immersion'
-        );
+  const prs = pullRequestData.map(event => {
+    const repo = event.pull_request.html_url.substring(
+      0,
+      event.pull_request.html_url.search('/pull/')
+    );
 
-        const weekOld = moment().subtract(7, 'days').startOf('day');
+    const hacktoberFestLabels = _.some(
+      event.labels,
+      label => label.name.toLowerCase() === 'open-source-immersion'
+    );
 
-        return {
-          has_hacktoberfest_label: hacktoberFestLabels,
-          number: event.number,
-          open: event.state === 'open',
-          repo_name: repo.replace('https://github.com/', ''),
-          title: event.title,
-          url: event.html_url,
-          created_at: moment(event.created_at).format('MMMM Do YYYY'),
-          is_pending: moment(event.created_at).isAfter(weekOld),
-          user: {
-            login: event.user.login,
-            url: event.user.html_url
-          }
-        };
-      })
-    )
-    .then(prs => {
-      const checkMergeStatus = _.map(prs, pr => {
-        const repoDetails = pr.repo_name.split('/');
-        const pullDetails = {
-          owner: repoDetails[0],
-          repo: repoDetails[1],
-          number: pr.number
-        };
+    const weekOld = moment().subtract(7, 'days').startOf('day');
 
-        return github.pullRequests
-          .checkMerged(pullDetails)
-          .then(logCallsRemaining)
-          .then(res => res.meta.status === '204 No Content')
-          .catch(err => {
-            // 404 means there wasn't a merge
-            if (err.code === 404) {
-              return false;
-            }
+    return {
+      has_hacktoberfest_label: hacktoberFestLabels,
+      number: event.number,
+      open: event.state === 'open',
+      repo_name: repo.replace('https://github.com/', ''),
+      title: event.title,
+      url: event.html_url,
+      created_at: moment(event.created_at).format('MMMM Do YYYY'),
+      is_pending: moment(event.created_at).isAfter(weekOld),
+      user: {
+        login: event.user.login,
+        url: event.user.html_url
+      }
+    };
+  });
 
-            throw err;
-          });
-      });
+  const mergeStatus = await Promise.all(
+    prs.map(async pr => {
+      const [owner, repo] = pr.repo_name.split('/');
 
-      return Promise.all(checkMergeStatus).then(mergeStatus =>
-        _.zipWith(prs, mergeStatus, (pr, merged) => _.assign(pr, { merged }))
-      );
-    });
+      try {
+        await github.rest.pulls.checkIfMerged({
+          owner,
+          repo,
+          pull_number: pr.number
+        });
+        return true;
+      } catch (err) {
+        // 404 means the pull request was not merged
+        if (err.status === 404) {
+          return false;
+        }
+
+        throw err;
+      }
+    })
+  );
+
+  return _.zipWith(prs, mergeStatus, (pr, merged) => _.assign(pr, { merged }));
 };
 
 module.exports = findPrs;

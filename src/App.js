@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
-import { Helmet } from 'react-helmet';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import GithubCorner from './components/GithubCorner';
 import RegisterReminder from './components/RegisterReminder';
 import PageWrapper from './components/PageWrapper';
@@ -18,13 +18,13 @@ const App = () => (
     <RegisterReminder />
     <PageWrapper>
       <Router>
-        <Switch>
-          <Route exact path="/" component={Home} />
-          <Route exact path="/user/:username" component={User} />
-          <Route exact path="/me" component={Me} />
-          <Route exact path="/faq" component={Faq} />
-          <Route component={NotFound} />
-        </Switch>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/user/:username" element={<User />} />
+          <Route path="/me" element={<Me />} />
+          <Route path="/faq" element={<Faq />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
       </Router>
     </PageWrapper>
     <Footer />

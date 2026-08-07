@@ -1,22 +1,18 @@
 'use strict';
 
 const express = require('express');
-const bodyParser = require('body-parser');
 const cors = require('cors');
 const dotenv = require('dotenv');
+const path = require('path');
 const setupGithubApi = require('./setupHelpers/setupGithubApi');
 const setupErrorHandling = require('./setupHelpers/setupErrorHandling');
 const PrController = require('./controllers/pr');
-const path = require('path');
 
 const start = () => {
-  // Load environment variables from .env file
-  dotenv.load();
+  dotenv.config();
 
   const app = express();
-
   const githubApi = setupGithubApi();
-
   const port = process.env.PORT || 5000;
 
   app.set('port', port);
@@ -25,11 +21,10 @@ const start = () => {
   setupErrorHandling(app);
 
   app.use(express.static(path.join(__dirname, '../build')));
-
-  app.use(bodyParser.json());
+  app.use(express.json());
 
   const corsOptions = {
-    origin:  process.env.REACT_APP_HOSTNAME
+    origin: process.env.REACT_APP_HOSTNAME
   };
 
   app.use(cors(corsOptions));

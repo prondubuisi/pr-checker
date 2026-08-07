@@ -1,14 +1,14 @@
 import React from 'react';
-import Redirect from 'react-router-dom/Redirect';
+import { Navigate } from 'react-router-dom';
 
 const Me = () => {
   const username = localStorage.getItem('myGithub');
 
   if (!username) {
-    return <Redirect to="/" />;
+    return <Navigate to="/" replace />;
   }
 
-  return <Redirect to={`/user/${username}`} />;
+  return <Navigate to={`/user/${username}`} replace />;
 };
 
 export default Me;

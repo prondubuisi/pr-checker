@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import withRouter from 'react-router-dom/withRouter';
+import { useNavigate } from 'react-router-dom';
 import TimeMessage from './TimeMessage';
 import UsernameInput from './UsernameInput';
 import CheckButton from './CheckButton';
@@ -8,10 +8,7 @@ import CheckButton from './CheckButton';
 class UsernameForm extends Component {
   static propTypes = {
     username: PropTypes.string,
-    // Provided by withRouter()
-    history: PropTypes.shape({
-      push: PropTypes.func.isRequired
-    }).isRequired
+    navigate: PropTypes.func.isRequired
   };
 
   static defaultProps = {
@@ -21,6 +18,12 @@ class UsernameForm extends Component {
   state = {
     username: this.props.username
   };
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.username !== this.props.username) {
+      this.setState({ username: this.props.username });
+    }
+  }
 
   handleUsernameChange = e => this.setState({ username: e.target.value });
 
@@ -33,8 +36,7 @@ class UsernameForm extends Component {
       return;
     }
 
-    const userUrl = this.getUserUrl(username);
-    this.props.history.push(userUrl);
+    this.props.navigate(this.getUserUrl(username));
   };
 
   getUserUrl = username => `/user/${username}`;
@@ -58,4 +60,9 @@ class UsernameForm extends Component {
   );
 }
 
-export default withRouter(UsernameForm);
+const UsernameFormWithNavigate = props => {
+  const navigate = useNavigate();
+  return <UsernameForm {...props} navigate={navigate} />;
+};
+
+export default UsernameFormWithNavigate;

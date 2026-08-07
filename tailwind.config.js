@@ -1,4 +1,6 @@
+/** @type {import('tailwindcss').Config} */
 module.exports = {
+  content: ['./public/index.html', './src/**/*.{js,jsx}'],
   theme: {
     extend: {
       colors: {
@@ -8,10 +10,9 @@ module.exports = {
         'mid-blue': '#39486E',
         'mid-purple': '#A11EC6',
         'mid-grey': '#99a1b3',
-        'yellow': '#fff922'
+        yellow: '#fff922'
       }
     }
   },
-  variants: {},
   plugins: []
 };

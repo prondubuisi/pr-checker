@@ -1,4 +1,4 @@
-FROM node:8-alpine
+FROM node:20-alpine
 
 WORKDIR /app
 
@@ -6,11 +6,11 @@ RUN adduser -D octocat && \
     chown octocat:octocat /app
 USER octocat
 
-# With this npm install will only ever be run when building if the application's package.json changes!
-COPY --chown=octocat:octocat package.json /app
+# Install when package manifests change
+COPY --chown=octocat:octocat package.json package-lock.json /app/
 
-# The latest offical nodejs image already includes yarn.
-RUN npm install --production
+# Full install so `npm start` can build the React app
+RUN npm ci
 
 COPY --chown=octocat:octocat . /app
 

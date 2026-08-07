@@ -1,9 +1,9 @@
 'use strict';
 
 const logCallsRemaining = res => {
-  const callsRemaining = res.meta['x-ratelimit-remaining'];
+  const callsRemaining = res.headers['x-ratelimit-remaining'];
 
-  if (process.env.NODE_ENV !== 'production' || callsRemaining < 100) {
+  if (process.env.NODE_ENV !== 'production' || Number(callsRemaining) < 100) {
     console.log(`API calls remaining: ${callsRemaining}`);
   }
 
