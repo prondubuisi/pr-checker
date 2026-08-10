@@ -30,9 +30,9 @@ const Footer = () => (
       <a
         rel="noopener noreferrer"
         className="bg-mid-purple hover:bg-light-blue text-white hover:text-mid-blue px-2 py-1 pointer no-underline text-sm"
-        href="/Faq"
+        href="/faq"
       >
-      <i class="fas fa-question"/> FAQs
+      <i className="fas fa-question"/> FAQs
       </a>
     </div>
   </footer>
