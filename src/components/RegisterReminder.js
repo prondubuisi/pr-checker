@@ -12,15 +12,8 @@ const RegisterReminder = () => (
       <path d="M16 0 A16 16 0 0 1 16 32 A16 16 0 0 1 16 0 M19 15 L13 15 L13 26 L19 26 z M16 6 A3 3 0 0 0 16 12 A3 3 0 0 0 16 6" />
     </svg>
     <span className="text-md leading-tight ml-4 mr-16 md:mr-8">
-      Remember to{' '}
-      <a
-        href="https://developers.facebook.com/developercircles/open-source-immersion/"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        register
-      </a>{' '}
-      to be eligible for the certifcate and tee!
+      This is a fan-made checker for Open Source Immersion-style pull
+      requests. The original Facebook Developer Circles program has ended.
     </span>
   </div>
 );
