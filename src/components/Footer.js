@@ -3,18 +3,6 @@ import React from 'react';
 const Footer = () => (
   <footer className="text-sm px-8 text-center flex-none py-4">
     <p className="text-white">
-      Having a NaN error? please check with https{' '}
-      <a
-        href="https://opensourcei.herokuapp.com"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        here 
-
-      </a>
-      .
-    </p>
-    <p className="text-white">
       Disclaimer: This site is fan made and not affiliated with{' '}
       <a
         href="https://developers.facebook.com/developercircles/open-source-immersion/"
