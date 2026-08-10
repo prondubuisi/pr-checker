@@ -75,3 +75,4 @@ const loadPrs = async (github, username) => {
 };
 
 module.exports = loadPrs;
+module.exports.sanitizeUsername = sanitizeUsername;
