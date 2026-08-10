@@ -4,8 +4,23 @@
 // https://developers.facebook.com/developercircles/open-source-immersion/
 const ORIGINAL_IMMERSION_YEAR = 2020;
 
+const sanitizeUsername = username => {
+  const sanitized = String(username == null ? '' : username).replace(
+    /[^A-Za-z0-9-]/g,
+    ''
+  );
+
+  if (!sanitized) {
+    const error = new Error('Invalid username.');
+    error.status = 400;
+    throw error;
+  }
+
+  return sanitized;
+};
+
 const buildQuery = (username, searchYear) =>
-  `-label:invalid+created:${searchYear}-07-15T00:00:00-12:00..${searchYear}-08-15T23:59:59-12:00+type:pr+is:public+author:${username}`;
+  `-label:invalid+created:${searchYear}-07-15T00:00:00-12:00..${searchYear}-08-15T23:59:59-12:00+type:pr+is:public+author:"${username}"`;
 
 const fetchPrsForYear = async (github, username, searchYear) => {
   return github.paginate(github.rest.search.issuesAndPullRequests, {
@@ -15,6 +30,7 @@ const fetchPrsForYear = async (github, username, searchYear) => {
 };
 
 const loadPrs = async (github, username) => {
+  const sanitizedUsername = sanitizeUsername(username);
   const currentYear = new Date().getFullYear();
 
   // Search every Jul 15–Aug 15 window from the original immersion year
@@ -26,7 +42,7 @@ const loadPrs = async (github, username) => {
   }
 
   const resultsByYear = await Promise.all(
-    years.map(year => fetchPrsForYear(github, username, year))
+    years.map(year => fetchPrsForYear(github, sanitizedUsername, year))
   );
 
   // Dedupe by PR id in case a year is listed twice
