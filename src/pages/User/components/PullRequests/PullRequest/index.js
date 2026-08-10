@@ -7,7 +7,7 @@ const PullRequest = ({ pullRequest }) => (
   <a className="pull-request shadow-lg" href={pullRequest.url}>
     <div
       className={`flex text-mid-grey mb-6 ${
-        pullRequest.has_hacktoberfest_label ? 'open-source-immersion ' : ''
+        pullRequest.has_immersion_label ? 'open-source-immersion ' : ''
       }p-4 break-words`}
     >
       <MergeStatus open={pullRequest.open} merged={pullRequest.merged} />
@@ -22,7 +22,7 @@ PullRequest.propTypes = {
     repo_name: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     created_at: PropTypes.string.isRequired,
-    has_hacktoberfest_label: PropTypes.bool.isRequired,
+    has_immersion_label: PropTypes.bool.isRequired,
     open: PropTypes.bool.isRequired,
     merged: PropTypes.bool.isRequired,
     user: PropTypes.shape({

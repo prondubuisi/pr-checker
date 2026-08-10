@@ -13,7 +13,7 @@ const findPrs = async (github, username) => {
       event.pull_request.html_url.search('/pull/')
     );
 
-    const hacktoberFestLabels = _.some(
+    const hasImmersionLabel = _.some(
       event.labels,
       label => label.name.toLowerCase() === 'open-source-immersion'
     );
@@ -21,7 +21,7 @@ const findPrs = async (github, username) => {
     const weekOld = moment().subtract(7, 'days').startOf('day');
 
     return {
-      has_hacktoberfest_label: hacktoberFestLabels,
+      has_immersion_label: hasImmersionLabel,
       number: event.number,
       open: event.state === 'open',
       repo_name: repo.replace('https://github.com/', ''),
