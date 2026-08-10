@@ -17,12 +17,16 @@ const fetchPrsForYear = async (github, username, searchYear) => {
 const loadPrs = async (github, username) => {
   const currentYear = new Date().getFullYear();
 
-  // Always include the original immersion period (2020).
-  // Also include the current year's Jul 15–Aug 15 window when it differs.
-  const years = new Set([ORIGINAL_IMMERSION_YEAR, currentYear]);
+  // Search every Jul 15–Aug 15 window from the original immersion year
+  // through the current year (inclusive). One query per year keeps each
+  // GitHub search string under query-length limits.
+  const years = [];
+  for (let year = ORIGINAL_IMMERSION_YEAR; year <= currentYear; year++) {
+    years.push(year);
+  }
 
   const resultsByYear = await Promise.all(
-    [...years].map(year => fetchPrsForYear(github, username, year))
+    years.map(year => fetchPrsForYear(github, username, year))
   );
 
   // Dedupe by PR id in case a year is listed twice
