@@ -10,7 +10,7 @@ import IssuesLink from './IssuesLink';
 import MeLinkInfo from './MeLinkInfo';
 
 export default class PullRequests extends Component {
-  static defaultProps = {
+  static propTypes = {
     username: PropTypes.string.isRequired
   };
 
@@ -45,17 +45,19 @@ export default class PullRequests extends Component {
     const apiUrl = process.env.REACT_APP_API_URL;
 
     this.setState({
-      loading: true
+      loading: true,
+      error: null
     });
 
-    fetch( apiUrl + `/prs?username=${username}`, {
+    fetch(apiUrl + `/prs?username=${encodeURIComponent(username)}`, {
       method: 'GET'
     })
       .then(response => response.json())
       .then(pullRequests =>
         this.setState({
           loading: false,
-          data: pullRequests
+          data: pullRequests,
+          error: null
         })
       )
       .catch(error =>
@@ -69,14 +71,14 @@ export default class PullRequests extends Component {
   getErrorMessage = () => {
     const { data, error } = this.state;
 
-    if (error && error.description) {
-      return error.error_description;
-    }
-
     if (data && data.error_description) {
       return data.error_description;
     }
-    console.log(data)
+
+    if (error && error.message) {
+      return error.message;
+    }
+
     return "Couldn't find any data or we hit an error, err try again later?";
   };
 
