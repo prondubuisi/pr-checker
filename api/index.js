@@ -5,7 +5,10 @@ const cors = require('cors');
 const dotenv = require('dotenv');
 const path = require('path');
 const setupGithubApi = require('./setupHelpers/setupGithubApi');
-const setupErrorHandling = require('./setupHelpers/setupErrorHandling');
+const {
+  setupRequestLogging,
+  setupErrorHandler
+} = require('./setupHelpers/setupErrorHandling');
 const PrController = require('./controllers/pr');
 
 const start = () => {
@@ -18,7 +21,7 @@ const start = () => {
   app.set('port', port);
   app.set('github', githubApi);
 
-  setupErrorHandling(app);
+  setupRequestLogging(app);
 
   app.use(express.static(path.join(__dirname, '../build')));
   app.use(express.json());
@@ -34,6 +37,8 @@ const start = () => {
   app.get('/*', (req, res) => {
     res.sendFile(path.join(__dirname, '../build', 'index.html'));
   });
+
+  setupErrorHandler(app);
 
   app.listen(port, () => {
     console.log(`Express server listening on port ${port}`);
