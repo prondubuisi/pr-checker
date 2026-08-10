@@ -31,7 +31,7 @@ const ShareButtons = ({ username, pullRequestCount }) => (
         <i className="fab fa-facebook fa-lg" /> Share
       </a>
     </div>
-    <div className="p-2" id="twitter-share">
+    <div className="p-2" id="whatsapp-share">
       <a
         target="_blank"
         rel="noopener noreferrer"
