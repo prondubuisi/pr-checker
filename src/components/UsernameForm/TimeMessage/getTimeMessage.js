@@ -1,25 +1,21 @@
- const getTimeMessage = () => {
+const getTimeMessage = () => {
   const today = new Date();
-  const currentMonth = today.getMonth();
-  const monthDiff = 7 - (currentMonth);
-  const currentYear = today.getFullYear();
-  let daysLeft = 45 - today.getDate();
+  const year = today.getFullYear();
+  const month = today.getMonth();
+  const date = today.getDate();
 
-  if(monthDiff == 0 && today.getDate() > 15 ) {
-    return "Open Source immersion is over, but open source never ends";
-  }
-   
-  if(monthDiff == 0) {
-    daysLeft = 15 - today.getDate();
-  }
+  const todayDate = new Date(year, month, date);
+  const endDate = new Date(year, 7, 15);
 
-  if(monthDiff < 0) {
-    return "Open Source immersion is over";
+  if (todayDate > endDate) {
+    if (month === 7) {
+      return 'Open Source immersion is over, but open source never ends';
+    }
+
+    return 'Open Source immersion is over';
   }
 
-  if (currentYear > 2020) {
-    return "Hopefully there is an open source immersion this year";
-  }
+  const daysLeft = Math.round((endDate - todayDate) / (1000 * 60 * 60 * 24));
 
   if (daysLeft === 0) {
     return "It's the very last day! Get your last PRs in!";
