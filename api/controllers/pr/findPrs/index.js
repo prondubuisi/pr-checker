@@ -32,33 +32,12 @@ const findPrs = async (github, username) => {
       user: {
         login: event.user.login,
         url: event.user.html_url
-      }
+      },
+      merged: Boolean(event.pull_request && event.pull_request.merged_at)
     };
   });
 
-  const mergeStatus = await Promise.all(
-    prs.map(async pr => {
-      const [owner, repo] = pr.repo_name.split('/');
-
-      try {
-        await github.rest.pulls.checkIfMerged({
-          owner,
-          repo,
-          pull_number: pr.number
-        });
-        return true;
-      } catch (err) {
-        // 404 means the pull request was not merged
-        if (err.status === 404) {
-          return false;
-        }
-
-        throw err;
-      }
-    })
-  );
-
-  return _.zipWith(prs, mergeStatus, (pr, merged) => _.assign(pr, { merged }));
+  return prs;
 };
 
 module.exports = findPrs;
